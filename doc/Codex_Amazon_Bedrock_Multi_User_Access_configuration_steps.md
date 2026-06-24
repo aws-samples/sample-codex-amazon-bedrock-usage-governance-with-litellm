@@ -372,7 +372,7 @@ Write-Host "Certificates generated successfully!" -ForegroundColor Green
 
 ### 5.3 Import Certificates to AWS Certificate Manager (ACM)
 
-Go to **AWS Console > Certificate Manager (ACM) > us-east-1 region:**
+Go to **AWS Console > Certificate Manager (ACM) > us-east-2 region:**
 
 **Import Server Certificate:**
 1. Click **"Import certificate"**
@@ -380,7 +380,7 @@ Go to **AWS Console > Certificate Manager (ACM) > us-east-1 region:**
 3. **Certificate private key:** paste contents of `pki/private/server.key`
 4. **Certificate chain:** paste contents of `pki/ca.crt`
 5. Click **"Import"**
-6. Note the **Certificate ARN** (e.g., `arn:aws:acm:us-east-1:123456:certificate/xxx`)
+6. Note the **Certificate ARN** (e.g., `arn:aws:acm:us-east-2:123456:certificate/xxx`)
 
 **Import Client Certificate:**
 
@@ -482,7 +482,7 @@ For 200+ developers, configure dual authentication (Mutual TLS + SAML/SSO):
 
 1. Select your newly created VPN endpoint > **Actions > Associate target network**
 2. VPC: select your VPC
-3. Subnet: select the subnet where private ALB runs (e.g., `us-east-1a` private subnet)
+3. Subnet: select the subnet where private ALB runs (e.g., `us-east-2a` private subnet)
 4. Click **Associate**. Status will change to **"Associating" > "Associated"** (takes 5-10 minutes)
 
 ---
@@ -738,7 +738,7 @@ Go to **VPC console > Endpoints > Create endpoint**:
 | Security group | Use `bedrock-vpce-sg` |
 | Policy | Full access (or restrict to specific model ARNs) |
 
-> **NOTE:** Also create a second VPC Endpoint for `com.amazonaws.us-east-1.bedrock` (the management API, separate from bedrock-mantle). This is needed for model listing calls.
+> **NOTE:** Also create a second VPC Endpoint for `com.amazonaws.us-east-2.bedrock` (the management API, separate from bedrock-mantle). This is needed for model listing calls.
 
 ---
 
