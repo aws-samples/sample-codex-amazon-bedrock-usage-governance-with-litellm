@@ -1,0 +1,65 @@
+version: "3.9"
+services:
+  litellm-proxy:
+    image: ghcr.io/berriai/litellm:v1.89.3
+    container_name: litellm-codex-proxy
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml
+      - ./custom_callback.py:/app/custom_callback.py
+    environment:
+      - DATABASE_URL=postgresql://litellm_admin:litellm_admin@litellm-codex-db.xxxxx.us-east-2.rds.amazonaws.com:5432/litellm_codex
+      - LITELLM_MASTER_KEY=sk-litellm-xxxx
+      - AWS_REGION_NAME=us-east-2
+      - CW_LOG_GROUP_NAME=/litellm/codex-usage
+      # EC2 instance profile credentials are used automatically (no AWS keys needed)
+    command: ["--config", "/app/config.yaml", "--port", "4000", "--num_workers", "1"]
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')\""]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+
+  codex-admin-dashboard:
+    build: ./codex-admin-dashboard
+    container_name: codex-admin-dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml
+      - ./codex-admin-dashboard:/app
+    environment:
+      - LITELLM_BASE_URL=http://litellm-proxy:4000
+      - LITELLM_MASTER_KEY=sk-litellm-xxx
+      - DATABASE_URL=postgresql://litellm_admin:litellm_admin@litellm-codex-db.xxxx.us-east-2.rds.amazonaws.com:5432/litellm_codex
+      - AWS_REGION_NAME=us-east-2
+      - IDENTITY_CENTER_REGION=ap-south-1
+      - IDENTITY_STORE_ID=d-xxxx # From IAM Identity Center settings
+      - CW_LOG_GROUP_NAME=/litellm/codex-usage
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_BASE_URL_PATH=/admin
+    depends_on:
+      litellm-proxy:
+        condition: service_healthy
+    restart: always
+  
+  # ===== NEW: codex Chat App =====
+  codex-chat-app:
+    build: ./codex-chat-app
+    container_name: codex-chat
+    ports:
+      - "8502:8501"
+    environment:
+      - LITELLM_BASE_URL=http://litellm-proxy:4000
+      - DEFAULT_MODEL=gpt-5.5
+      - SEARCH_PROVIDER=duckduckgo
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_BASE_URL_PATH=/chat
+      - LITELLM_MASTER_KEY=sk-litellm-xxxx # From IAM Identity Center settings
+    depends_on:
+      litellm-proxy:
+        condition: service_healthy
+    restart: always

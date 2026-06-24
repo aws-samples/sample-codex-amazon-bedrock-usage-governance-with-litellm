@@ -1,0 +1,64 @@
+# litellm_config.yaml
+# Codex on Bedrock - LiteLLM Proxy Configuration
+# Region: us-east-2 (ohio) | Bedrock GPT models via mantle endpoint
+
+model_list:
+  # GPT-5.5 — Recommended default for Codex
+  - model_name: gpt-5.5
+    litellm_params:
+      model: bedrock_mantle/openai.gpt-5.5
+      aws_region_name: us-east-2
+      api_base: https://bedrock-mantle.us-east-2.api.aws/v1
+    model_info:
+      max_tokens: 64000
+      max_input_tokens: 1000000
+      input_cost_per_token: 0.0000055
+      output_cost_per_token: 0.000033
+
+  # GPT-5.4 — Previous generation, lower cost
+  - model_name: gpt-5.4
+    litellm_params:
+      model: bedrock_mantle/openai.gpt-5.4
+      aws_region_name: us-east-2
+      api_base: https://bedrock-mantle.us-east-2.api.aws/v1
+    model_info:
+      max_tokens: 64000
+      max_input_tokens: 1000000
+      input_cost_per_token: 0.00000275
+      output_cost_per_token: 0.0000165
+
+litellm_settings:
+  callbacks: custom_callback.proxy_handler_instance
+
+general_settings:
+  master_key: "sk-litellm-xxx"
+  database_url: "postgresql://litellm_admin:litellm_admin@litellm-codex-db.xxx.us-east-2.rds.amazonaws.com:5432/litellm_codex"
+  
+environment_variables:
+  AWS_REGION_NAME: "us-east-2"
+  CW_LOG_GROUP_NAME: "/litellm/codex-usage"
+
+# ===== DASHBOARD SETTINGS (LiteLLM proxy ignores this section) =====
+dashboard_settings:
+  # Default budgets and limits for new users/teams
+  defaults:
+    user_budget: 50.0          # USD per month
+    user_tpm: 200000           # Tokens per minute
+    user_rpm: 60               # Requests per minute
+    team_budget: 500.0         # USD per team
+    team_tpm: 500000           # Tokens per minute per team
+    team_rpm: 100              # Requests per minute per team
+
+  # Default models for new users (subset of model_list)
+  default_user_models:
+    - gpt-5.5
+    - gpt-5.4
+
+  # Default models for new teams (subset of model_list)
+  default_team_models:
+    - gpt-5.5
+    - gpt-5.4
+
+  # AWS regions available in "Add Model" dropdown
+  aws_regions:
+    - us-east-2
