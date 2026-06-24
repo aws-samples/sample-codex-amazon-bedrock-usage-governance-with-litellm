@@ -1086,7 +1086,6 @@ docker-compose --version  # Should show Docker Compose version 2.x
 
 ### 7.1 litellm_config.yaml
 
-Save as `~/Codex-code-admin/litellm_config.yaml`
 
 > *Note: The actual YAML configuration content is maintained as a separate file in the project. Refer to the project repository for the full configuration.*
 
@@ -1094,7 +1093,6 @@ Save as `~/Codex-code-admin/litellm_config.yaml`
 
 ### 7.2 docker-compose.yml
 
-Save as `~/Codex-code-admin/docker-compose.yml`
 
 > *Note: The actual docker-compose YAML content is maintained as a separate file in the project. Refer to the project repository for the full configuration.*
 
@@ -1109,15 +1107,15 @@ docker-compose up -d
 
 # Check container status
 docker-compose ps
-# Expected: litellm-proxy and litellm-admin-dashboard both showing "Up (healthy)"
+# Expected: litellm-proxy and codex-admin-dashboard both showing "Up (healthy)"
 
 # Test LiteLLM health
 curl http://localhost:4000/health
 # Expected: {"status": "healthy"}
 
 # View logs if something is wrong
-docker-compose logs -f litellm
-docker-compose logs -f litellm-admin-dashboard
+docker-compose logs -f litellm-proxy
+docker-compose logs -f codex-admin-dashboard
 
 # If need to bring down container
 docker-compose down
@@ -1128,7 +1126,7 @@ docker-compose logs litellm --tail 50
 docker system prune -a -f --volumes
 
 # If need to restart
-docker compose restart litellm
+docker compose restart litellm-proxy
 ```
 
 ---
@@ -1177,7 +1175,7 @@ CloudWatch Log Groups:
 ### 9.1 Project Directory Structure
 
 ```
-litellm-admin-dashboard/
+codex-admin-dashboard/
 ├── Dockerfile
 ├── requirements.txt
 ├── app.py                          # Main dashboard page
@@ -1320,7 +1318,7 @@ sudo openvpn --config ~/Codex-code-vpn.ovpn
 Set these in your Codex configuration file:
 
 ```toml
-# If Codex CLI is installed, find the below folder and paste this JSON:
+# If Codex CLI is installed, find the below folder and paste this content:
 # ~/.Codex/config.toml
 
 model = "gpt-5.5"
@@ -1332,7 +1330,7 @@ base_url = "http://internal-litellm-codex-alb-12345.us-east-2.elb.amazonaws.com/
 wire_api = "responses"
 
 [model_providers.litellm.http_headers]
-Authorization = "Bearer sk-6djIL5QNhAVvyA"
+Authorization = "Bearer sk-xxxxxx"
 ```
 
 ---
@@ -1397,4 +1395,3 @@ Current spend: $50.00, limit: $50.00"
 
 ---
 
-*End o
