@@ -51,7 +51,7 @@ This implementation guide delivers a system for deploying Codex on Amazon Bedroc
 
 The following diagram shows the complete end-to-end architecture. All traffic between developers and Bedrock flows entirely within the AWS network once Client VPN and VPC Endpoints are configured.
 
-![Architecture](doc/Codex_MultiUser_AmazonBedrock.jpg)
+![Architecture](Codex_MultiUser_AmazonBedrock.jpg)
 
 ---
 
