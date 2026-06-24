@@ -1,6 +1,6 @@
 #  Codex through Amazon Bedrock — Usage governance with LiteLLM & Streamlit UI
 
-A production-ready platform to centrally govern, administer, and monitor Codex AI access for engineering teams using **Amazon Bedrock** as the inference backend and **LiteLLM** as the proxy layer.
+A platform to centrally govern, administer, and monitor Codex AI access for engineering teams using **Amazon Bedrock** as the inference backend and **LiteLLM** as the proxy layer.
 
 ---
 
