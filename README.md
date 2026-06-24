@@ -1,4 +1,4 @@
-#Codex Admin — Self-Hosted AI Governance Platform on AWS Bedrock
+# Codex Admin — Self-Hosted AI Governance Platform on AWS Bedrock
 
 A production-ready platform to centrally govern, administer, and monitor Codex AI access for engineering teams using **AWS Bedrock** as the inference backend and **LiteLLM** as the proxy layer.
 
@@ -176,3 +176,11 @@ Codex-code-admin/
 - **EC2 instance profile auth.** No AWS access keys are stored in config files or environment variables.
 - **Hard budget blocks, not soft alerts.** The proxy refuses requests at the limit — there is no "notify and hope" pattern.
 - **Audit trail that survives container restarts.** CloudWatch log streams and Postgres records are external to the container lifecycle.
+
+## Security
+
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## License
+
+This library is licensed under the MIT-0 License. See the LICENSE file.
