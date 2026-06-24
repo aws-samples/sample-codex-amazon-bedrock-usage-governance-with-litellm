@@ -452,8 +452,8 @@ Go to **AWS Console > Certificate Manager (ACM) > us-east-1 region:**
 arn:aws:iam::<ACCOUNT_ID>:saml-provider/IAMIdentityCenter-ClientVPN
 ```
 
-> Create NAT gateway and add it to the route table of the private subnet.
-> Destination IP address while adding route in route table is `[IP_ADDRESS]`
+Create NAT gateway and add it to the route table of the private subnet.
+> Destination IP address while adding route in route table is `0.0.0.0`
 
 ---
 
