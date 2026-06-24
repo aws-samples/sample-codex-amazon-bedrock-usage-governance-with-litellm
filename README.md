@@ -6,7 +6,7 @@ A platform to centrally govern, administer, and monitor Codex AI access for engi
 
 ## The Problem
 
-When an enterprise rolls outCodex (or any LLM-based developer tool) across a team, three hard problems emerge immediately:
+When an enterprise rolls out Codex (or any LLM-based developer tool) across a team, three hard problems emerge immediately:
 
 1. **No spend control.** Each developer's usage goes directly to Bedrock. There is no per-user budget, no team cap, and no way to stop runaway spend before the monthly bill arrives.
 2. **No visibility.** There is no audit trail for who called what model, how many tokens they used, and what it cost. Finance and security teams cannot answer "who used what?"
@@ -72,11 +72,10 @@ An admin dashboard (Streamlit, port 8501) gives ops/platform teams a GUI for the
 
 ---
 
-## Architecture
 
 | Component | Tech | Port |
 |---|---|---|
-| LiteLLM Proxy | Docker (`ghcr.io/berriai/litellm:v1.90.0`) | 4000 |
+| LiteLLM Proxy | Docker (`ghcr.io/berriai/litellm:v1.89.3`) | 4000 |
 | Admin Dashboard | Streamlit + Python | 8501 |
 | Codex Chat App | Streamlit + Python | 8502 |
 | Database | PostgreSQL on AWS RDS | 5432 |
