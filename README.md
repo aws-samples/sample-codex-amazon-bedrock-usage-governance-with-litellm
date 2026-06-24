@@ -1,6 +1,6 @@
-# Codex Admin — Self-Hosted AI Governance Platform on AWS Bedrock
+#  Codex through Amazon Bedrock — Usage governance with LiteLLM & Streamlit UI
 
-A production-ready platform to centrally govern, administer, and monitor Codex AI access for engineering teams using **AWS Bedrock** as the inference backend and **LiteLLM** as the proxy layer.
+A production-ready platform to centrally govern, administer, and monitor Codex AI access for engineering teams using **Amazon Bedrock** as the inference backend and **LiteLLM** as the proxy layer.
 
 ---
 
@@ -35,6 +35,10 @@ Developers /Codex / Chat App
 An admin dashboard (Streamlit, port 8501) gives ops/platform teams a GUI for the entire lifecycle. A self-service chat app (Streamlit, port 8502) gives end users a governed Codex Chat interface.
 
 ---
+
+## Architecture
+
+![Architecture](doc/Codex_MultiUser_AmazonBedrock.jpg)
 
 ## Key Capabilities
 
