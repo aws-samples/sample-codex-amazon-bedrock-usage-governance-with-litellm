@@ -1,4 +1,4 @@
-#  Codex through Amazon Bedrock — Usage governance with LiteLLM & Streamlit UI
+#  OpenAI Codex through Amazon Bedrock — Usage governance with LiteLLM & Streamlit UI
 
 A platform to centrally govern, administer, and monitor Codex AI access for engineering teams using **Amazon Bedrock** as the inference backend and **LiteLLM** as the proxy layer.
 
@@ -6,7 +6,7 @@ A platform to centrally govern, administer, and monitor Codex AI access for engi
 
 ## The Problem
 
-When an enterprise rolls out Codex (or any LLM-based developer tool) across a team, three hard problems emerge immediately:
+When an enterprise rolls out OpenAI Codex (or any LLM-based developer tool) across a team, three hard problems emerge immediately:
 
 1. **No spend control.** Each developer's usage goes directly to Bedrock. There is no per-user budget, no team cap, and no way to stop runaway spend before the monthly bill arrives.
 2. **No visibility.** There is no audit trail for who called what model, how many tokens they used, and what it cost. Finance and security teams cannot answer "who used what?"
@@ -16,10 +16,10 @@ When an enterprise rolls out Codex (or any LLM-based developer tool) across a te
 
 ## The Solution
 
-This platform sits between your developers and Bedrock, adding a governance and observability layer without changing how developers use Codex .
+This platform sits between your developers and Bedrock, adding a governance and observability layer without changing how developers use OpenAI Codex .
 
 ```
-Developers /Codex / Chat App
+Developers /OpenAI Codex / Chat App
            │
            ▼
    LiteLLM Proxy (:4000)        ← API key auth, budget enforcement, rate limits
